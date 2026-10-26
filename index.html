@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8fa" />
+  <meta name="description" content="수업 필기, 핵심 개념, 문제풀이를 과목별로 정리한 학습 아카이브" />
+  <title>NoteSpace · 나의 학습 아카이브</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#home" aria-label="홈으로 이동">
+        <div class="brand-mark"><span>✳</span></div>
+        <span class="brand-text">note<span>space</span><small>MY STUDY LIBRARY</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav-group" aria-label="기본 메뉴">
+        <button class="nav-link selected" data-view="all"><span class="nav-icon">▦</span> 전체 자료 <span class="nav-counter" id="navAllCount">0</span></button>
+        <button class="nav-link" data-view="notes"><span class="nav-icon">▤</span> 수업 필기</button>
+        <button class="nav-link" data-view="problems"><span class="nav-icon">◇</span> 문제 풀이</button>
+        <button class="nav-link" data-view="favorites"><span class="nav-icon">☆</span> 즐겨찾기</button>
+      </nav>
+      <div class="side-heading"><span class="side-label">SUBJECTS</span><button id="addSubjectBtn" title="과목 추가" aria-label="과목 추가">＋</button></div>
+      <nav class="nav-group" id="subjectList" aria-label="과목별 메뉴"></nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card"><div class="tip-symbol">✦</div><b>쌓일수록 더 강해지는 기록</b><p>매일의 수업을 나만의 지식으로 저장해 보세요.</p></div>
+        <button class="side-manage" id="editModeBtn"><span>⚙</span> <span id="editModeLabel">편집 공간 열기</span></button>
+      </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <main class="main">
+      <header class="topbar">
+        <div class="top-left"><button class="icon-button menu-button" id="menuButton" aria-label="메뉴 열기">☰</button><span class="breadcrumb">내 공간 <span> / </span> <b id="breadcrumbCurrent">전체 자료</b></span></div>
+        <div class="top-actions"><button class="icon-button" id="themeButton" aria-label="테마 변경" title="테마 변경">☾</button><button class="button button-outline share-btn" id="copySiteLink">↗ <span>사이트 링크 복사</span></button><button class="button button-primary" id="newItemBtn">＋ 새 자료 작성</button></div>
+      </header>
+      <div class="main-content">
+        <section class="hero" id="hero">
+          <div class="hero-inner"><div class="eyebrow"><span class="tiny-dot"></span> YOUR PERSONAL KNOWLEDGE SPACE</div><h1>배운 것을 기록하고,<br><em>나만의 지식</em>으로 만들다.</h1><p>수업 필기부터 문제 풀이까지. 흩어진 공부의 조각들을<br class="desktop-break" /> 한곳에 모아 정리하는 나의 학습 아카이브.</p><div class="hero-actions"><button class="button button-white" id="heroNewBtn">새 기록 시작하기 <span>↗</span></button><span class="hero-sub">Organize · Learn · Grow</span></div></div>
+          <div class="hero-decoration" aria-hidden="true"><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div><div class="floating-card fc-one">✎ <span>CLASS NOTES</span></div><div class="floating-card fc-two">ƒ(x) <span>PROBLEM SOLVING</span></div><div class="hero-symbol">✳</div></div>
+        </section>
+        <section class="stat-grid" aria-label="자료 현황"><div class="stat-card"><div class="stat-icon violet">▤</div><div><span class="stat-number" id="statNotes">0</span><span class="stat-label">수업 필기</span></div></div><div class="stat-card"><div class="stat-icon blue">◇</div><div><span class="stat-number" id="statProblems">0</span><span class="stat-label">문제 풀이</span></div></div><div class="stat-card"><div class="stat-icon peach">▦</div><div><span class="stat-number" id="statSubjects">0</span><span class="stat-label">학습 과목</span></div></div></section>
+        <section class="content-section">
+          <div class="section-heading"><div><div class="section-kicker" id="sectionKicker">LIBRARY</div><h2 id="sectionTitle">모든 학습 자료 <span id="itemCount" class="count-pill">0</span></h2><p id="sectionDescription">지금까지 정리한 필기와 문제풀이를 둘러보세요.</p></div><div class="section-actions"><button class="button button-light" id="manageSubjectsBtn">과목 관리</button></div></div>
+          <div class="toolbar"><label class="search-box"><span>⌕</span><input type="search" id="searchInput" placeholder="제목, 내용, 태그로 검색해 보세요" autocomplete="off" /><kbd>/</kbd></label><div class="filter-controls"><select id="subjectFilter" aria-label="과목 필터"><option value="all">전체 과목</option></select><select id="sortSelect" aria-label="정렬 방식"><option value="newest">최신순</option><option value="oldest">오래된순</option><option value="title">제목순</option></select></div></div>
+          <div class="chips" id="categoryChips"><button class="chip active" data-type="all">전체 보기</button><button class="chip" data-type="note">수업 필기</button><button class="chip" data-type="problem">문제 풀이</button></div>
+          <div class="cards-grid" id="cardsGrid"></div>
+          <div class="empty-state hidden" id="emptyState"><div class="empty-illustration">☷</div><h3>아직 해당하는 자료가 없어요</h3><p>검색어를 바꾸거나 첫 번째 공부 기록을 추가해 보세요.</p><button class="button button-primary" id="emptyNewBtn">＋ 자료 추가하기</button></div>
+        </section>
+        <footer class="footer"><span>© 2026 notespace. Made for learning.</span><span>조금씩 쌓이는 공부의 기록 ✳</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="modal-overlay hidden" id="readOverlay" role="presentation"><article class="read-dialog" role="dialog" aria-modal="true" aria-labelledby="readTitle"><div class="read-header"><button class="back-link" id="closeReadBtn">← 자료 목록으로</button><div class="read-toolbar"><button class="mini-action" id="favoriteReadBtn" title="즐겨찾기">☆</button><button class="mini-action" id="copyNoteBtn">↗ 링크 복사</button><button class="mini-action edit-only hidden" id="editCurrentBtn">✎ 수정</button><button class="mini-action" id="printBtn">⎙ 인쇄</button></div></div><div class="read-scroll"><div class="article-top"><div class="article-meta" id="readMeta"></div><h1 id="readTitle"></h1><p id="readSummary"></p><div class="read-tags" id="readTags"></div></div><div class="article-content markdown-body" id="readContent"></div><section class="solution-section hidden" id="solutionSection"><div class="solution-heading"><span class="solution-label">ANSWER & EXPLANATION</span><h2>문제 풀이 · 해설</h2></div><button class="button button-outline solution-toggle" id="solutionToggle">해설 보기 <span>⌄</span></button><div class="solution-body markdown-body hidden" id="readSolution"></div></section><div class="article-bottom"><span>✦ 계속해서 배움의 기록을 쌓아가세요.</span><button class="button button-light" id="bottomBackBtn">목록으로 돌아가기 →</button></div></div></article></div>
+  <div class="modal-overlay hidden" id="editorOverlay" role="presentation"><section class="editor-dialog" role="dialog" aria-modal="true" aria-labelledby="editorTitle"><div class="editor-header"><div><div class="section-kicker">WORKSPACE EDITOR</div><h2 id="editorTitle">새 학습 자료</h2></div><button class="close-circle" id="closeEditorBtn" aria-label="닫기">×</button></div><form id="entryForm" class="editor-form"><div class="two-fields"><label>자료 유형<select id="entryType" required><option value="note">수업 필기</option><option value="problem">문제 풀이</option></select></label><label>과목<select id="entrySubject" required></select></label></div><label>제목<input id="entryTitle" placeholder="예: 헤스의 법칙과 엔탈피 변화" required maxlength="140" /></label><label>짧은 설명<input id="entrySummary" placeholder="자료 목록에 표시될 소개" maxlength="240" /></label><label>태그 <span class="muted">(쉼표로 구분)</span><input id="entryTags" placeholder="예: 화학, 열화학, 핵심개념" /></label><label>본문 <span class="muted">(Markdown, LaTeX 수식 지원)</span><textarea id="entryContent" rows="10" placeholder="## 핵심 개념&#10;본문을 작성하세요.&#10;&#10;수식: $E=mc^2$"></textarea></label><label id="solutionEditorLabel">문제 풀이 및 해설<textarea id="entrySolution" rows="7" placeholder="정답과 풀이를 작성하세요. 방문자는 해설 보기 버튼으로 확인할 수 있습니다."></textarea></label><div class="editor-help">💡 제목은 <code>## 소제목</code>, 수식은 <code>$x^2$</code> 또는 <code>$$\frac{a}{b}$$</code> 형식으로 작성할 수 있습니다.</div><div class="editor-footer"><button type="button" class="button button-danger hidden" id="deleteEntryBtn">삭제</button><div class="footer-right"><button type="button" class="button button-light" id="previewEntryBtn">미리보기</button><button type="submit" class="button button-primary">저장하기</button></div></div></form></section></div>
+  <div class="modal-overlay hidden" id="managerOverlay" role="presentation"><section class="manager-dialog" role="dialog" aria-modal="true" aria-labelledby="managerTitle"><div class="editor-header"><div><div class="section-kicker">PUBLISH & MANAGE</div><h2 id="managerTitle">나의 편집 공간</h2></div><button class="close-circle" id="closeManagerBtn" aria-label="닫기">×</button></div><div class="manager-scroll"><div class="notice"><b>이 브라우저에서 한 수정은 아직 공개되지 않습니다.</b><p>다른 사람에게 변경 내용을 보여주려면 아래에서 <b>data.js 다운로드</b> 후 GitHub 저장소의 같은 파일을 교체하세요. 방문자는 내용을 볼 수 있지만 공개 파일은 수정할 수 없습니다.</p></div><div class="manager-actions"><button class="button button-primary" id="exportBtn">↓ data.js 다운로드</button><button class="button button-light" id="importBtn">↑ data.js 불러오기</button><input type="file" accept=".js,.json,application/json,text/javascript" id="importFile" hidden /><button class="button button-light" id="resetBtn">공개본으로 되돌리기</button></div><h3>과목 관리</h3><div class="subject-manage-list" id="manageSubjectList"></div><form class="add-subject-row" id="addSubjectForm"><input id="newSubjectName" maxlength="30" placeholder="새 과목 이름 (예: 생명과학)" required /><button class="button button-outline" type="submit">＋ 과목 추가</button></form><p class="tiny-info">과목을 삭제하면 해당 과목의 기존 자료는 '기타' 과목으로 이동합니다.</p><h3>공개 방법</h3><ol class="publish-steps"><li>사이트 파일을 GitHub 공개 저장소에 올립니다.</li><li><b>Settings → Pages</b>에서 <b>Deploy from a branch</b>, <b>main</b>, <b>/(root)</b>를 선택합니다.</li><li>사이트에 새 글을 작성한 후 <b>data.js 다운로드</b>를 눌러, 저장소의 <b>data.js</b> 파일을 교체하고 커밋합니다.</li><li>배포된 주소를 친구들에게 공유합니다.</li></ol><p class="tiny-info">※ 이 편집 모드는 개인 브라우저 작업 공간입니다. 비밀번호가 있는 관리자 서버 기능은 제공하지 않습니다.</p></div></section></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <!-- 선택적 수식 및 Markdown 렌더링 라이브러리: 사이트 기본 기능은 이들이 없어도 동작합니다. -->
+  <script async src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"></script>
+</body>
+</html>
